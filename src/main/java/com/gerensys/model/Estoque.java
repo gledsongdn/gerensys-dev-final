@@ -25,7 +25,7 @@ public class Estoque {
 	
 	@ManyToOne
 	@JoinColumn(name = "id_manutencao")
-	private Manutencao manutencao;
+	private Manutencao manutencao; //Pq?? Se exluir manutencao irá excluir o estoque tbm
 
 
 

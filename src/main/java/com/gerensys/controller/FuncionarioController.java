@@ -16,79 +16,80 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class FuncionarioController {
 
-	@Autowired
-	private FuncionarioRepository funcionarioRepository;
+    @Autowired
+    private FuncionarioRepository funcionarioRepository;
 
-	@GetMapping("/cadastrofuncionarios")
-	public ModelAndView cadastro() {
-		ModelAndView andView = new ModelAndView("cadastro/cadastro-funcionario");
+    @GetMapping("/cadastrofuncionarios")
+    public ModelAndView cadastro() {
+        ModelAndView andView = new ModelAndView("cadastro/cadastro-funcionario");
 
-		return andView;
-	}
+        return andView;
+    }
 
-	@PostMapping("**/salvarfuncionario")
-	public ModelAndView salvar(Funcionario funcionario) {
+    @PostMapping("**/salvarfuncionario")
+    public ModelAndView salvar(Funcionario funcionario) {
 
-		funcionarioRepository.save(funcionario);
+        funcionarioRepository.save(funcionario);
 
-		ModelAndView andView = new ModelAndView("cadastro/cadastro-funcionario");
+        ModelAndView andView = new ModelAndView("listas/listar-funcionario");
+        Iterable<Funcionario> funcAll = funcionarioRepository.findAll();
+        andView.addObject("funcionarios", funcAll);
 
-		return andView;
-	}
+        return andView;
+    }
 
-	@GetMapping("/listafuncionarios")
-	public ModelAndView funcionarios() {
+    @GetMapping("/listafuncionarios")
+    public ModelAndView funcionarios() {
 
-		ModelAndView andView = new ModelAndView("listas/listar-funcionario");
-		Iterable<Funcionario> funcAll = funcionarioRepository.findAll();
-		andView.addObject("funcionarios", funcAll);
+        ModelAndView andView = new ModelAndView("listas/listar-funcionario");
+        Iterable<Funcionario> funcAll = funcionarioRepository.findAll();
+        andView.addObject("funcionarios", funcAll);
 
-		return andView;
-	}
+        return andView;
+    }
 
-	@GetMapping("/editarfuncionario/{idfuncionario}")
-	public ModelAndView editar(@PathVariable("idfuncionario") Long idfuncionario) {
+    @GetMapping("/editarfuncionario/{idfuncionario}")
+    public ModelAndView editar(@PathVariable("idfuncionario") Long idfuncionario) {
 
-		Optional<Funcionario> funcionario = funcionarioRepository.findById(idfuncionario);
-		ModelAndView andView = new ModelAndView("editar/editar-funcionario");
-		andView.addObject("objfuncionario", funcionario.get());
+        Optional<Funcionario> funcionario = funcionarioRepository.findById(idfuncionario);
+        ModelAndView andView = new ModelAndView("editar/editar-funcionario");
+        andView.addObject("objfuncionario", funcionario.get());
 
-		return andView;
+        return andView;
 
-	}
+    }
 
-	@PostMapping("**/salvaredit")
-	public ModelAndView atualiza(Funcionario funcionario) {
+    @PostMapping("**/salvaredit")
+    public ModelAndView atualiza(Funcionario funcionario) {
 
-		funcionarioRepository.save(funcionario);
+        funcionarioRepository.save(funcionario);
 
-		ModelAndView andView = new ModelAndView("listas/listar-funcionario");
-		andView.addObject("objfuncionario", new Funcionario());
-		Iterable<Funcionario> funcAll = funcionarioRepository.findAll();
-		andView.addObject("funcionarios", funcAll);
+        ModelAndView andView = new ModelAndView("listas/listar-funcionario");
+        andView.addObject("objfuncionario", new Funcionario());
+        Iterable<Funcionario> funcAll = funcionarioRepository.findAll();
+        andView.addObject("funcionarios", funcAll);
 
-		return andView;
-	}
+        return andView;
+    }
 
-	@GetMapping("/removerfuncionario/{idfuncionario}")
-	public ModelAndView excluir(@PathVariable("idfuncionario") Long idfuncionario) {
+    @GetMapping("/removerfuncionario/{idfuncionario}")
+    public ModelAndView excluir(@PathVariable("idfuncionario") Long idfuncionario) {
 
-		funcionarioRepository.deleteById(idfuncionario);
-		ModelAndView andView = new ModelAndView("listas/listar-funcionario");
-		Iterable<Funcionario> funcAll = funcionarioRepository.findAll();
-		andView.addObject("funcionarios", funcAll);
+        funcionarioRepository.deleteById(idfuncionario);
+        ModelAndView andView = new ModelAndView("listas/listar-funcionario");
+        Iterable<Funcionario> funcAll = funcionarioRepository.findAll();
+        andView.addObject("funcionarios", funcAll);
 
-		return andView;
+        return andView;
+    }
 
-	}
+    @PostMapping("**/pesquisarfuncionario")
+    public ModelAndView pesquisar(@RequestParam("nomepesquisa") String nomepesquisa) {
 
-	@PostMapping("**/pesquisarfuncionario")
-	public ModelAndView pesquisar(@RequestParam("nomepesquisa") String nomepesquisa) {
+        ModelAndView andView = new ModelAndView("listas/listar-funcionario");
+        andView.addObject("funcionarios", funcionarioRepository.findFuncionarioByName(nomepesquisa));
 
-		ModelAndView andView = new ModelAndView("listas/listar-funcionario");
-		andView.addObject("funcionarios", funcionarioRepository.findFuncionarioByName(nomepesquisa));
-
-		return andView;
-	}
+        return andView;
+    }
 
 }

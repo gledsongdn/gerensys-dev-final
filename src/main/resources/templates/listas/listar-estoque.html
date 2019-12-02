@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="pt-br">
 
 <head>
 
@@ -12,13 +12,13 @@
   <title>GerenSys - Estoque</title>
 
   <!-- Custom fonts for this template-->
-  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
 
   <!-- Page level plugin CSS-->
-  <link href="vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
+  <link href="/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
 
   <!-- Custom styles for this template-->
-  <link href="css/sb-admin.css" rel="stylesheet">
+  <link href="/css/sb-admin.css" rel="stylesheet">
 
 </head>
 
@@ -203,18 +203,20 @@
           </div>
 
           <div class="col-md-6">
-            <div class="input-group">
-              <input name="data[search]" class="form-control" id="search" type="text" placeholder="Pesquisar">
-              <span class="input-group-btn">
-                <button class="btn btn-primary" type="submit">
-                  <span class="fas fa-search"></span>
-                </button>
-              </span>
-            </div>
+            <form action="pesquisaritem" method="post">
+              <div class="input-group">
+                <input name="nomepesquisa" class="form-control" id="search" type="text" placeholder="Pesquisar item por nome">
+                <span class="input-group-btn">
+                  <button class="btn btn-primary" type="submit">
+                    <span class="fas fa-search"></span>
+                  </button>
+                </span>
+              </div>
+            </form>
           </div>
 
           <div class="col-md-3">
-            <a href="cadastro-estoque.html" class="btn btn-primary pull-right h2">Cadastrar Peças</a>
+            <a href="/cadastraestoque" class="btn btn-primary pull-right h2">Cadastrar Peças</a>
           </div>
         </div> <!-- /#top -->
 
@@ -224,25 +226,25 @@
             <thead>
               <tr>
                 <th>#</th>
-                <th>Código</th>
+                <th>Nome</th>
                 <th>Tipo</th>
-                <th>Item</th>
                 <th>Descrição</th>
                 <th>Quantidade</th>
+                <th>Preço</th>
                 <th>Ações</th>
               </tr>
             </thead>
-            <tbody>
-              <tr>
-                <th scope="row">1</th>
-                <td>1334</td>
-                <td>Pneu</td>
-                <td>Michelan</td>
-                <td>Pneu novo michilan</td>
-                <td>100</td>
+            <tbody th:remove="${#arrays.isEmpty(itens)} ? all : 'all-but-first'">
+              <tr th:each="item: ${itens}">
+                <th scope="row" th:text="${item.id}">1</th>
+                <td th:text="${item.nomeItem}">1334</td>
+                <td th:text="${item.tipo}">Pneu</td>
+                <td th:text="${item.descricaoPeca}">Pneu novo michilan</td>
+                <td th:text="${item.quantidade}">100</td>
+                <td th:text="${'R$ '+item.preco}">100</td>
                 <td class="actions">
-                  <a class="btn btn-warning btn-sm" href="cadastro-estoque.html">Editar</a>
-                  <a class="btn btn-danger btn-sm" href="#" data-toggle="modal" data-target="#delete-modal">Excluir</a>
+                  <a class="btn btn-warning btn-sm" th:href="@{/editaritem/{iditem}(iditem = ${item.id})}">Editar</a>
+                  <a class="btn btn-danger btn-sm" th:href="@{/removeritem/{iditem}(iditem = ${item.id})}">Excluir</a>
                 </td>
               </tr>
               <tr>
@@ -328,23 +330,23 @@
   </div>
 
   <!-- Bootstrap core JavaScript-->
-  <script src="vendor/jquery/jquery.min.js"></script>
-  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="/vendor/jquery/jquery.min.js"></script>
+  <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
   <!-- Core plugin JavaScript-->
-  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+  <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
 
   <!-- Page level plugin JavaScript-->
-  <script src="vendor/chart.js/Chart.min.js"></script>
-  <script src="vendor/datatables/jquery.dataTables.js"></script>
-  <script src="vendor/datatables/dataTables.bootstrap4.js"></script>
+  <script src="/vendor/chart.js/Chart.min.js"></script>
+  <script src="/vendor/datatables/jquery.dataTables.js"></script>
+  <script src="/vendor/datatables/dataTables.bootstrap4.js"></script>
 
   <!-- Custom scripts for all pages-->
-  <script src="js/sb-admin.min.js"></script>
+  <script src="/js/sb-admin.min.js"></script>
 
   <!-- Demo scripts for this page-->
-  <script src="js/demo/datatables-demo.js"></script>
-  <script src="js/demo/chart-area-demo.js"></script>
+  <script src="/js/demo/datatables-demo.js"></script>
+  <script src="/js/demo/chart-area-demo.js"></script>
 
 </body>
 

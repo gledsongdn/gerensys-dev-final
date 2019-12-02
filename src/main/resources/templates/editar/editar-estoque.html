@@ -1,16 +1,15 @@
 <!DOCTYPE html>
-
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="pt-br">
 
 <head>
 
-  <meta charset=" utf-8">
+  <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>GerenSys - Funcionários</title>
+  <title>GerenSys - Cadastrar Estoque</title>
 
   <!-- Custom fonts for this template-->
   <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -25,22 +24,21 @@
 
 <body id="page-top">
 
-  <!-- Modal -->
-  <div class="modal" tabindex="-1" role="dialog" id="delete-modal" aria-labelledby="modalLabel">
-    <div class="modal-dialog" role="document">
+  <!-- Modal Salvar -->
+  <div class="modal fade" id="modalsalvar" tabindex="-1" role="dialog" aria-labelledby="modalsalvar" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">Excluir Item</h5>
+          <h5 class="modal-title" id="exampleModalCenterTitle">Cadastrado</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
-          <p>Deseja realmente excluir este item?</p>
+          Cadastrado com sucesso.
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-primary">Sim</button>
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Não</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
         </div>
       </div>
     </div>
@@ -48,7 +46,7 @@
 
   <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
 
-    <a class="navbar-brand mr-1" href="/">GerenSys</a>
+    <a class="navbar-brand mr-1" href="index.html">GerenSys</a>
 
     <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
       <i class="fas fa-bars"></i>
@@ -102,8 +100,8 @@
           <span>Funcionários</span>
         </a>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <a class="dropdown-item" href="/cadastrofuncionarios">Cadastrar</a>
-          <a class="dropdown-item" href="/listafuncionarios">Listar</a>
+          <a class="dropdown-item" href="cadastro-funcionario.html">Cadastrar</a>
+          <a class="dropdown-item" href="listar-funcionario.html">Listar</a>
         </div>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="dropdownMenuButton" role="button" data-toggle="dropdown"
@@ -193,143 +191,71 @@
         <!-- Breadcrumbs-->
         <ol class="breadcrumb">
           <li class="breadcrumb-item">
-            <a href="#">Lista</a>
+            <a href="#">Cadastro</a>
           </li>
-          <li class="breadcrumb-item active">Funcionário</li>
+          <li class="breadcrumb-item active">Estoque</li>
         </ol>
 
-        <div id="top" class="row">
-          <div class="col-md-3">
-            <h3>Funcionários</h3>
-          </div>
-          <div class="col-md-6">
-            <form action="pesquisarfuncionario" method="post">
-              <div class="input-group">
-                <input name="nomepesquisa" class="form-control" id="search" type="text"
-                  placeholder="Pesquisar Funcionário por nome">
-                <span class="input-group-btn">
-                  <button class="btn btn-primary" type="submit">
-                    <span class="fas fa-search"></span>
-                  </button>
-                </span>
+        <!-- DataTables Example -->
+        <form action="editestoque" method="post" accept-charset="UTF-8" th:object="${objestoque}">
+          <input name="id" th:field="*{id}" readonly type="hidden">
+          <input name="id" th:field="*{manutencao}" readonly type="hidden">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="nomeItem" class="form-label required" autofocus>Nome do Item</label>
+                <input class="form-control" required autofocus name="nomeItem" type="text" id="nomeItem" th:field="*{nomeItem}">
               </div>
-            </form>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="preco" class="form-label">Preço</label>
+                <input class="form-control" name="preco" type="number" step="any" id="preco" th:field="*{preco}">
+              </div>
+            </div>
           </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="tipo" class="form-label">Tipo</label>
+                <input class="form-control" name="tipo" type="text" id="tipo" th:field="*{tipo}">
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="quantidade" class="form-label required">Quantidade</label>
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                  </div>
+                  <input class="form-control" name="quantidade" required type="number" th:field="*{quantidade}">
+                </div>
 
-          <div class="col-md-3">
-            <a href="/cadastrofuncionarios" class="btn btn-primary pull-right h2">Novo Funcionário</a>
+              </div>
+            </div>
           </div>
-        </div>
-      </div><!-- /#top -->
-
-      <!-- Tabelas listagem -->
-      <div class="table-responsive">
-        <table class="table table-hover">
-          <thead>
-            <tr>
-              <th>Matrícula</th>
-              <th>Nome</th>
-              <th>CPF</th>
-              <th>RG</th>
-              <th>Cargo</th>
-              <th>Telefone</th>
-              <th>Ações</th>
-            </tr>
-          </thead>
-          <tbody th:remove="${#arrays.isEmpty(funcionarios)} ? all : 'all-but-first'">
-              <tr th:each="funcionario: ${funcionarios}">
-                <th scope="row" th:text="${funcionario.id}">B48615</th>
-                <td th:text="${funcionario.nome}">Enrico Giovanni Lima</td>
-                <td th:text="${funcionario.cpf}">13475625083</td>
-                <td th:text="${funcionario.rg}">408920543</td>
-                <td th:text="${funcionario.nomeCargo}">Administrativo</td>
-                <td th:text="${funcionario.telefone}">6112345678</td>
-                <td class="actions">
-                  <a class="btn btn-success btn-sm" href="#">Visualizar</a>
-                  <a class="btn btn-warning btn-sm" th:href="@{/editarfuncionario/{idfuncionario}(idfuncionario = ${funcionario.id})}">Editar</a>
-                  <a class="btn btn-danger btn-sm" th:href="@{/removerfuncionario/{idfuncionario}(idfuncionario = ${funcionario.id})}">Excluir</a>
-                </td>
-              </tr>
-              <tr>
-                <th scope="row">M26316</th>
-                <td>Lorena Larissa Baptista</td>
-                <td>47951482013</td>
-                <td>258853153</td>
-                <td>Gerente</td>
-                <td>6112345678</td>
-                <td class="actions">
-                  <a class="btn btn-success btn-sm" href="#">Visualizar</a>
-                  <a class="btn btn-warning btn-sm" href="cadastro-funcionario.html">Editar</a>
-                  <a class="btn btn-danger btn-sm" href="#" data-toggle="modal" data-target="#delete-modal">Excluir</a>
-                </td>
-              </tr>
-              <tr>
-                <th scope="row">M28956</th>
-                <td>Manuel Henrique Brito</td>
-                <td>34678746064</td>
-                <td>387318483</td>
-                <td>Gerente</td>
-                <td>6112345678</td>
-                <td class="actions">
-                  <a class="btn btn-success btn-sm" href="#">Visualizar</a>
-                  <a class="btn btn-warning btn-sm" href="cadastro-funcionario.html">Editar</a>
-                  <a class="btn btn-danger btn-sm" href="#" data-toggle="modal" data-target="#delete-modal">Excluir</a>
-                </td>
-              </tr>
-              <tr>
-                <th scope="row">C82316</th>
-                <td>Enzo Davi Rodrigues</td>
-                <td>55672493068</td>
-                <td>380268619</td>
-                <td>Manutenção</td>
-                <td>6112345678</td>
-                <td class="actions">
-                  <a class="btn btn-success btn-sm" href="#">Visualizar</a>
-                  <a class="btn btn-warning btn-sm" href="cadastro-funcionario.html">Editar</a>
-                  <a class="btn btn-danger btn-sm" href="#" data-toggle="modal" data-target="#delete-modal">Excluir</a>
-                </td>
-              </tr>
-              <tr>
-                <th scope="row">B46512</th>
-                <td>Allana Olivia Martins</td>
-                <td>00436085070</td>
-                <td>194022122</td>
-                <td>Administrativo</td>
-                <td>6112345678</td>
-                <td class="actions">
-                  <a class="btn btn-success btn-sm" href="#">Visualizar</a>
-                  <a class="btn btn-warning btn-sm" href="cadastro-funcionario.html">Editar</a>
-                  <a class="btn btn-danger btn-sm" href="#" data-toggle="modal" data-target="#delete-modal">Excluir</a>
-                </td>
-              </tr>
-              <tr>
-                <th scope="row">F33816</th>
-                <td>Betina Alana Mendes</td>
-                <td>46963318069</td>
-                <td>507968104</td>
-                <td>Financeiro</td>
-                <td>6112345678</td>
-                <td class="actions">
-                  <a class="btn btn-success btn-sm" href="#">Visualizar</a>
-                  <a class="btn btn-warning btn-sm" href="cadastro-funcionario.html">Editar</a>
-                  <a class="btn btn-danger btn-sm" href="#" data-toggle="modal" data-target="#delete-modal">Excluir</a>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
-        <!-- navegacao -->
-        <nav aria-label="Page navigation example">
-          <ul class="pagination">
-            <li class="page-item disabled"><a class="page-link" href="#">&lt; Anterior</a></li>
-            <li class="page-item active"><a class="page-link" href="#">1</a></li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item"><a class="page-link" href="#">Próximo &gt;</a></li>
-          </ul>
-        </nav>
-
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="descricaoPeca" class="form-label">Descrição</label>
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                  </div>
+                  <textarea class="form-control" name="descricaoPeca" id="descricaoPeca" rows="3" placeholder="Descreva aqui o problema"
+                    required th:field="*{descricaoPeca}"></textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- salvar -->
+          <div class="row">
+            <div class="form-group" style="margin-top: 15px;">
+              <div class="col-md-12">
+                <input class="btn btn-success" type="submit" value="Salvar">
+                <button type="button" class="btn btn-outline-secondary" onClick="history.go(-1)">Cancelar</button>
+              </div>
+            </div>
+          </div>
+        </form>
       </div>
       <!-- /.container-fluid -->
 
@@ -381,7 +307,6 @@
   <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
 
   <!-- Page level plugin JavaScript-->
-  <script src="/vendor/chart.js/Chart.min.js"></script>
   <script src="/vendor/datatables/jquery.dataTables.js"></script>
   <script src="/vendor/datatables/dataTables.bootstrap4.js"></script>
 
@@ -390,7 +315,6 @@
 
   <!-- Demo scripts for this page-->
   <script src="/js/demo/datatables-demo.js"></script>
-  <script src="/js/demo/chart-area-demo.js"></script>
 
 </body>
 
