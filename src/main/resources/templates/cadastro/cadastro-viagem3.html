@@ -198,82 +198,24 @@
         </ol>
 
         <!-- Informcoes da viagem -->
-        <div th:object="${viagemobj}">
+        <div th:object="${pedidoobj}">
         </div>
         <!-- Informcoes do motorista -->
-        <div th:each="m : ${motoristaobj}">
+        <div th:each="m : ${funcionarioobj}">
         </div>
 
         <h5>Selecione o veículo abaixo para realizar a viagem:</h5>
-
-        <!-- DataTables Example -->
-        <form action="#" accept-charset="UTF-8">
-          <div class="row">
-            <div class="col-md-3">
-              <div class="form-group">
-                <label for="first_name" class="form-label required" autofocus="">Placa</label>
-                <input class="form-control" required="" autofocus="" name="placa" type="text" id="placa">
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-4">
-                <div class="form-group">
-                  <label for="RG" class="form-label required">Marca</label>
-                  <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                    </div>
-                    <input class="form-control" required="" type="text">
-                  </div>
-
-                </div>
-              </div>
-              <div class="col-md-3">
-                <div class="form-group">
-                  <label for="email" class="form-label required">Modelo</label>
-                  <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                    </div>
-                    <input class="form-control" required="" type="text">
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-4">
-                <div class="form-group">
-                  <label for="email" class="form-label required">Renavam</label>
-                  <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                    </div>
-                    <input class="form-control" required="" type="number" placeholder="Apenas números">
-                  </div>
-                </div>
-              </div>
-            </div>
-        </form>
-
-
-
-
-        <!-- salvar -->
-        <div class="row">
-          <div class="form-group" style="margin-top: 30px; margin-left: 1em;">
-            <div class="col-md-3">
-              <input class="btn btn-success" data-toggle="modal" data-target="#modalsalvar" type="submit"
-                value="Confirmar">
-            </div>
-          </div>
-        </div>
 
         <!-- Tabelas listagem -->
         <div class="table-responsive">
           <table class="table table-hover">
             <thead>
               <tr>
-                <th>#</th>
+                <th>Renavam</th>
                 <th>Placa</th>
                 <th>Marca</th>
                 <th>Modelo</th>
                 <th>Ano</th>
-                <th>Renavam</th>
                 <th>Nº Chassi</th>
                 <th>Quilometragem</th>
                 <th>Status</th>
@@ -281,16 +223,15 @@
             </thead>
             <tbody th:remove="${#arrays.isEmpty(veiculos)} ? all : 'all-but-first'">
               <tr th:each="veiculo: ${veiculos}">
-                <th scope="row" th:text="${veiculo.id}">1</th>
+                <th scope="row" th:text="${veiculo.renavam}">1</th>
                 <td th:text="${veiculo.placa}">ABC1234</td>
                 <td th:text="${veiculo.marca}">Fiat</td>
                 <td th:text="${veiculo.modelo}">Palio</td>
                 <td th:text="${veiculo.ano}">2019</td>
-                <td th:text="${veiculo.renavam}">55710425276</td>
                 <td th:text="${veiculo.chassi}">9BFNSZPPA28003351</td>
                 <td th:text="${veiculo.quilometragem}">93000</td>
                 <td class="actions">
-                    <a class="btn btn-success btn-sm" th:href="@{/salvarviagem/{motoristaid}/{viagemid}/{veiculoid} (motoristaid = ${motoristaobj.id}, viagemid = ${viagemobj.id}, veiculoid = ${veiculo.id})}">Selecionar</a>
+                    <a class="btn btn-success btn-sm" th:href="@{/salvarviagem/{funcionarioid}/{pedidoid}/{veiculoid} (funcionarioid = ${funcionarioobj.id}, pedidoid = ${pedidoobj.idpedido}, veiculoid = ${veiculo.renavam})}">Selecionar</a>
                 </td>
               </tr>
               <tr>

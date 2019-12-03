@@ -178,7 +178,7 @@
         </ol>
 
         <!-- Informcoes da viagem -->
-        <div th:object="${viagemobj}">
+        <div th:object="${pedidoobj}">
         </div>
 
         <h5>Selecione o motorista abaixo para realizar a viagem:</h5>
@@ -249,17 +249,17 @@
                 <th>Selecionar</th>
               </tr>
             </thead>
-            <tbody th:remove="${#arrays.isEmpty(motoristas)} ? all : 'all-but-first'">
-              <tr th:each="motorista: ${motoristas}">
-                <th scope="row" th:text="${motorista.id}">1</th>
-                <td th:text="${motorista.nomeCompleto}">Victor Caio Costa</td>
-                <td th:text="${motorista.cpf}">52592926003</td>
-                <td th:text="${motorista.rg}">286747339</td>
-                <td th:text="${motorista.cnh}">98821896031</td>
-                <td th:text="${motorista.validadeCnh}">21/03/2020</td>
-                <td th:text="${motorista.telefone}">6112345678</td>
+            <tbody th:remove="${#arrays.isEmpty(funcionarios)} ? all : 'all-but-first'">
+              <tr th:each="funcionario: ${funcionarios}">
+                <th scope="row" th:text="${funcionario.id}">1</th>
+                <td th:text="${funcionario.nome}">Victor Caio Costa</td>
+                <td th:text="${funcionario.cpf}">52592926003</td>
+                <td th:text="${funcionario.rg}">286747339</td>
+                <td th:text="${funcionario.numeroCnh}">98821896031</td>
+                <td th:text="${funcionario.validadeCnh}">21/03/2020</td>
+                <td th:text="${funcionario.telefone}">6112345678</td>
                 <td class="actions">
-                  <a class="btn btn-success btn-sm" th:href="@{/cadastroviagemparte3/{motoristaid}/{viagemid} (motoristaid = ${motorista.id}, viagemid = ${viagemobj.id})}">Selecionar</a>
+                  <a class="btn btn-success btn-sm" th:href="@{/cadastroviagemparte3/{funcionarioid}/{pedidoid} (funcionarioid = ${funcionario.id}, pedidoid = ${pedidoobj.idpedido})}">Selecionar</a>
                 </td>
               </tr>
               <tr>

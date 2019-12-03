@@ -15,4 +15,7 @@ public interface FuncionarioRepository extends CrudRepository<Funcionario, Long>
 
   @Query("select f from Funcionario f where f.nome like %?1%")
   List<Funcionario> findFuncionarioByName(String nome);
+
+  @Query("select f from Funcionario f where f.nomeCargo = 'MOTORISTA'")
+  List<Funcionario> findFuncionarioByCargo(String nomeCargo);
 }

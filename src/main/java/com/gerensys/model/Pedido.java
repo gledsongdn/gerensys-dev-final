@@ -1,13 +1,6 @@
 package com.gerensys.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 
 @Entity
 public class Pedido {
@@ -28,12 +21,31 @@ public class Pedido {
 	//Hora devolucao?
 	private String horaDevolucao;
 	
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "id_cliente")
 	private Cliente cliente;
 	
 	@OneToOne
 	private Funcionario funcionario;
+
+	@OneToOne(mappedBy = "pedido")
+	private Viagem viagem;
+
+	public boolean validar() {
+		if (horaDevolucao.isEmpty()) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public Viagem getViagem() {
+		return viagem;
+	}
+
+	public void setViagem(Viagem viagem) {
+		this.viagem = viagem;
+	}
 
 	public Funcionario getFuncionario() {
 		return funcionario;
