@@ -1,8 +1,7 @@
 package com.gerensys.controller;
 
-import com.gerensys.model.Estoque;
-import com.gerensys.model.Funcionario;
-import com.gerensys.repository.EstoqueRepository;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,7 +10,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.Optional;
+import com.gerensys.model.Estoque;
+import com.gerensys.repository.EstoqueRepository;
 
 @Controller
 public class EstoqueController {

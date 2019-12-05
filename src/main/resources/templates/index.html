@@ -18,7 +18,7 @@
   <link href="/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
 
   <!-- Custom styles for this template-->
-  <link href="/css/sb-admin.css" rel="stylesheet">
+  <link href="/css/sb-admin.css" rel="stylesheet">m
 
 </head>
 
@@ -92,7 +92,6 @@
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
           <a class="dropdown-item" href="/cadastroveiculo">Cadastrar</a>
           <a class="dropdown-item" href="/listaveiculo">Listar</a>
-          <a class="dropdown-item" href="cadastro-seguro2.html">Cadastrar Seguro</a>
         </div>
       </li>
 
@@ -125,7 +124,7 @@
         </a>
         <div class="dropdown-menu" aria-labelledby="pagesDropdown">
           <a class="dropdown-item" href="/cadastraestoque">Cadastrar</a>
-          <a class="dropdown-item" href="listar-estoque.html">Lista</a>
+          <a class="dropdown-item" href="/listaestoque">Lista</a>
         </div>
       </li>
       <li class="nav-item dropdown">
@@ -152,6 +151,16 @@
           <a class="dropdown-item" href="listar-relatorio.html">Listar</a>
         </div>
       </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+          <i class="fa fa-user"></i>
+          <span>Cliente</span>
+        </a>
+        <div class="dropdown-menu" aria-labelledby="pagesDropdown">
+          <a class="dropdown-item" href="/pedido">Pedido</a>
+        </div>
+      </li>
     </ul>
 
     <div id="content-wrapper">
@@ -175,25 +184,22 @@
         <!-- Buttons -->
         <div class="row">
           <div class="col-xl-2 col-sm-3 mb-4">
-            <a href="listar-funcionario.html" class="btn btn-primary btn-lg">Funcionários</a>
+            <a href="/listafuncionarios" class="btn btn-primary btn-lg">Funcionários</a>
           </div>
           <div class="col-xl-2 col-sm-3 mb-4">
-            <a href="listar-veiculo.html" class="btn btn-danger btn-lg">Veículos</a>
+            <a href="/listaveiculo" class="btn btn-danger btn-lg">Veículos</a>
           </div>
           <div class="col-xl-2 col-sm-3 mb-4">
-            <a href="listar-motorista.html" class="btn btn-success btn-lg">Motoristas</a>
-          </div>
-          <div class="col-xl-2 col-sm-3 mb-4">
-            <a href="listar-manutencao.html" class="btn btn-warning btn-lg">Manutenções</a>
+            <a href="/listamanutencao" class="btn btn-warning btn-lg">Manutenções</a>
           </div>
         </div>
 
         <div class="row">
           <div class="col-xl-2 col-sm-3 mb-4">
-            <a href="listar-viagem.html" class="btn btn-secondary btn-lg">Viagens</a>
+            <a href="/listaviagem" class="btn btn-secondary btn-lg">Viagens</a>
           </div>
           <div class="col-xl-2 col-sm-3 mb-4">
-            <a href="listar-estoque.html" class="btn btn-warning btn-lg">Estoque</a>
+            <a href="/listaestoque" class="btn btn-warning btn-lg">Estoque</a>
           </div>
           <div class="col-xl-2 col-sm-3 mb-4">
             <a href="financas-autorizar.html" class=" btn btn-info btn-lg">Finanças</a>
