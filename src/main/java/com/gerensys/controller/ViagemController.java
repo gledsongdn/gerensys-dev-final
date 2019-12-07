@@ -19,89 +19,88 @@ import java.util.Optional;
 @Controller
 public class ViagemController {
 
-    @Autowired
-    private ViagemRepository viagemRepository;
+	@Autowired
+	private ViagemRepository viagemRepository;
 
-    @Autowired
-    private PedidoRepository pedidoRepository;
+	@Autowired
+	private PedidoRepository pedidoRepository;
 
-    @Autowired
-    private FuncionarioRepository funcionarioRepository;
+	@Autowired
+	private FuncionarioRepository funcionarioRepository;
 
-    @Autowired
-    private VeiculoRepository veiculoRepository;
+	@Autowired
+	private VeiculoRepository veiculoRepository;
 
-    @GetMapping("/cadastroviagem")
-    public ModelAndView inicio() {
+	@GetMapping("/cadastroviagem")
+	public ModelAndView inicio() {
 
-        ModelAndView andView = new ModelAndView("cadastro/cadastro-viagem");
+		ModelAndView andView = new ModelAndView("cadastro/cadastro-viagem");
 
-        Iterable<Pedido> pedidos = pedidoRepository.findAll();
-        andView.addObject("pedidos", pedidos);
-        return andView;
-    }
+		Iterable<Pedido> pedidos = pedidoRepository.findAll();
+		andView.addObject("pedidos", pedidos);
+		return andView;
+	}
 
-    @GetMapping("/cadastroviagemparte2/{pedidoid}")
-    public ModelAndView viagemparte2(@PathVariable("pedidoid") Long pedidoid) {
+	@GetMapping("/cadastroviagemparte2/{pedidoid}")
+	public ModelAndView viagemparte2(@PathVariable("pedidoid") Long pedidoid) {
 
-        Optional<Pedido> pedido = pedidoRepository.findById(pedidoid);
+		Optional<Pedido> pedido = pedidoRepository.findById(pedidoid);
 
-        ModelAndView andView = new ModelAndView("cadastro/cadastro-viagem2");
+		ModelAndView andView = new ModelAndView("cadastro/cadastro-viagem2");
 
-        andView.addObject("pedidoobj", pedido.get());
-        andView.addObject("funcionarios", funcionarioRepository.findFuncionarioByCargo("MOTORISTA"));
-        return andView;
-    }
+		andView.addObject("pedidoobj", pedido.get());
+		andView.addObject("funcionarios", funcionarioRepository.findFuncionarioByCargo("MOTORISTA"));
+		return andView;
+	}
 
-    @GetMapping("/cadastroviagemparte3/{funcionarioid}/{pedidoid}")
-    public ModelAndView viagemparte3(@PathVariable("funcionarioid") Long funcionarioid,
-                                     @PathVariable("pedidoid") Long pedidoid) {
+	@GetMapping("/cadastroviagemparte3/{funcionarioid}/{pedidoid}")
+	public ModelAndView viagemparte3(@PathVariable("funcionarioid") Long funcionarioid,
+			@PathVariable("pedidoid") Long pedidoid) {
 
-        Optional<Funcionario> funcionario = funcionarioRepository.findById(funcionarioid);
-        Optional<Pedido> pedido = pedidoRepository.findById(pedidoid);
-        Iterable<Veiculo> veiculos = veiculoRepository.findAll();
+		Optional<Funcionario> funcionario = funcionarioRepository.findById(funcionarioid);
+		Optional<Pedido> pedido = pedidoRepository.findById(pedidoid);
+		Iterable<Veiculo> veiculos = veiculoRepository.findAll();
 
-        ModelAndView andView = new ModelAndView("cadastro/cadastro-viagem3");
-        andView.addObject("funcionarioobj", funcionario.get());
-        andView.addObject("pedidoobj", pedido.get());
-        andView.addObject("veiculos", veiculos);
-        return andView;
-    }
+		ModelAndView andView = new ModelAndView("cadastro/cadastro-viagem3");
+		andView.addObject("funcionarioobj", funcionario.get());
+		andView.addObject("pedidoobj", pedido.get());
+		andView.addObject("veiculos", veiculos);
+		return andView;
+	}
 
-    @GetMapping("/salvarviagem/{funcionarioid}/{pedidoid}/{veiculoid}")
-    public ModelAndView salvarviagem(@PathVariable("funcionarioid") Long funcionarioid,
-                                     @PathVariable("pedidoid") Long pedidoid, @PathVariable("veiculoid") Long veiculoid) {
+	@GetMapping("/salvarviagem/{funcionarioid}/{pedidoid}/{veiculoid}")
+	public ModelAndView salvarviagem(@PathVariable("funcionarioid") Long funcionarioid,
+			@PathVariable("pedidoid") Long pedidoid, @PathVariable("veiculoid") Long veiculoid) {
 
-        Funcionario funcionario = funcionarioRepository.findById(funcionarioid).get();
-        Pedido pedido = pedidoRepository.findById(pedidoid).get();
-        Veiculo veiculo = veiculoRepository.findById(veiculoid).get();
-        Viagem viagem = new Viagem();
+		Funcionario funcionario = funcionarioRepository.findById(funcionarioid).get();
+		Pedido pedido = pedidoRepository.findById(pedidoid).get();
+		Veiculo veiculo = veiculoRepository.findById(veiculoid).get();
+		Viagem viagem = new Viagem();
 
-        funcionario.setPedido(pedido);
-        funcionario.setVeiculo(veiculo);
+		funcionario.setPedido(pedido);
+		funcionario.setVeiculo(veiculo);
 
-        viagem.setFuncionario(funcionario);
-        viagem.setPedido(pedido);
-        viagem.setVeiculo(veiculo);
+		viagem.setFuncionario(funcionario);
+		viagem.setPedido(pedido);
+		viagem.setVeiculo(veiculo);
 
-        viagemRepository.save(viagem);
-        funcionarioRepository.save(funcionario);
+		viagemRepository.save(viagem);
+		funcionarioRepository.save(funcionario);
 
-        ModelAndView modelAndView = new ModelAndView("listas/listar-viagem");
-        modelAndView.addObject("viagens", viagemRepository.findAll());
+		ModelAndView modelAndView = new ModelAndView("listas/listar-viagem");
+		modelAndView.addObject("viagens", viagemRepository.findAll());
 
-        return modelAndView;
-    }
+		return modelAndView;
+	}
 
+	@GetMapping("/listaviagem")
+	public ModelAndView viagens() {
 
-    @GetMapping("/listaviagem")
-    public ModelAndView viagens() {
+		Iterable<Viagem> viagens = viagemRepository.findAll();
 
-        Iterable<Viagem> viagens = viagemRepository.findAll();
+		ModelAndView modelAndView = new ModelAndView("listas/listar-viagem");
+		modelAndView.addObject("viagens", viagens);
 
-        ModelAndView modelAndView = new ModelAndView("listas/listar-viagem");
-        modelAndView.addObject("viagens", viagens);
-
-        return modelAndView;
-    }
+		return modelAndView;
+	}
 }

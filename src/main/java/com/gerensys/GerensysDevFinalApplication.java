@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class GerensysDevFinalApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(GerensysDevFinalApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(GerensysDevFinalApplication.class, args);
+    }
 
 }

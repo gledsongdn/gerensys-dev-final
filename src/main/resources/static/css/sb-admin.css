@@ -10932,3 +10932,9 @@ h11 {
 .panel-heading{
   font-size:150%;
 }
+
+select[readonly] {
+  background: #eee; /*Simular campo inativo - Sugestão @GabrielRodrigues*/
+  pointer-events: none;
+  touch-action: none;
+}

@@ -91,5 +91,16 @@ public class FuncionarioController {
 
         return andView;
     }
+    
+    @GetMapping("/visualizarfuncionario/{idfuncionario}")
+    public ModelAndView detalhes(@PathVariable("idfuncionario") Long idfuncionario) {
+
+        Optional<Funcionario> funcionario = funcionarioRepository.findById(idfuncionario);
+        ModelAndView andView = new ModelAndView("detalhe/detalhe-funcionario");
+        andView.addObject("objfuncionario", funcionario.get());
+
+        return andView;
+
+    }
 
 }
