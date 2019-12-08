@@ -47,7 +47,7 @@
 
   <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
 
-    <a class="navbar-brand mr-1" href="index.html">GerenSys</a>
+    <a class="navbar-brand mr-1" href="/">GerenSys</a>
 
     <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
       <i class="fas fa-bars"></i>
@@ -55,29 +55,13 @@
 
     <!-- Navbar -->
     <ul class="navbar-nav ml-auto ml-md-0 direito">
-      <li class="nav-item dropdown no-arrow mx-1">
-        <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown"
-          aria-haspopup="true" aria-expanded="false">
-          <i class="fas fa-bell fa-fw"></i>
-          <span class="badge badge-danger">9+</span>
-        </a>
-      </li>
-      <li class="nav-item dropdown no-arrow mx-1">
-        <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button" data-toggle="dropdown"
-          aria-haspopup="true" aria-expanded="false">
-          <i class="fas fa-envelope fa-fw"></i>
-          <span class="badge badge-danger">7</span>
-        </a>
-      </li>
       <li class="nav-item dropdown no-arrow">
         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
           aria-haspopup="true" aria-expanded="false">
           <i class="fas fa-user-circle fa-fw"></i>
         </a>
         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-          <a class="dropdown-item" href="#">Configurações</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">Sair</a>
+          <a class="dropdown-item" href="/logout">Sair</a>
         </div>
       </li>
     </ul>
@@ -89,7 +73,7 @@
     <!-- Sidebar -->
     <ul class="sidebar navbar-nav">
       <li class="nav-item active">
-        <a class="nav-link" href="index.html">
+        <a class="nav-link" href="/">
           <i class="fas fa-home"></i>
           <span>Página inicial</span>
         </a>
@@ -101,8 +85,8 @@
           <span>Funcionários</span>
         </a>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <a class="dropdown-item" href="cadastro-funcionario.html">Cadastrar</a>
-          <a class="dropdown-item" href="listar-funcionario.html">Listar</a>
+          <a class="dropdown-item" href="/cadastrofuncionarios">Cadastrar</a>
+          <a class="dropdown-item" href="/listafuncionarios">Listar</a>
         </div>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="dropdownMenuButton" role="button" data-toggle="dropdown"
@@ -111,21 +95,11 @@
           <span>Veículos</span>
         </a>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <a class="dropdown-item" href="cadastro-veiculo.html">Cadastrar</a>
-          <a class="dropdown-item" href="listar-veiculo.html">Listar</a>
-          <a class="dropdown-item" href="cadastro-seguro2.html">Cadastrar Seguro</a>
+          <a class="dropdown-item" href="/cadastroveiculo">Cadastrar</a>
+          <a class="dropdown-item" href="/listaveiculo">Listar</a>
         </div>
       </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown"
-          aria-haspopup="true" aria-expanded="false">
-          <i class="fa fa-users" aria-hidden="true"></i>
-          <span>Motoristas</span>
-        </a>
-        <div class="dropdown-menu" aria-labelledby="pagesDropdown">
-          <a class="dropdown-item" href="cadastro-motorista.html">Cadastrar</a>
-          <a class="dropdown-item" href="listar-motorista.html">Listar</a>
-        </div>
+
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown"
           aria-haspopup="true" aria-expanded="false">
@@ -133,8 +107,7 @@
           <span>Manutenções</span>
         </a>
         <div class="dropdown-menu" aria-labelledby="pagesDropdown">
-          <a class="dropdown-item" href="cadastro-manutencao.html">Cadastrar</a>
-          <a class="dropdown-item" href="listar-manutencao.html ">Listar</a>
+          <a class="dropdown-item" href="/listamanutencao ">Listar</a>
         </div>
       </li>
       <li class="nav-item dropdown">
@@ -144,8 +117,8 @@
           <span>Viagens</span>
         </a>
         <div class="dropdown-menu" aria-labelledby="pagesDropdown">
-          <a class="dropdown-item" href="cadastro-viagem3.html">Cadastrar</a>
-          <a class="dropdown-item" href="listar-viagem.html">Lista</a>
+          <a class="dropdown-item" href="/cadastroviagem">Cadastrar</a>
+          <a class="dropdown-item" href="/listaviagem">Lista</a>
         </div>
       </li>
       <li class="nav-item dropdown">
@@ -155,8 +128,8 @@
           <span>Estoque</span>
         </a>
         <div class="dropdown-menu" aria-labelledby="pagesDropdown">
-          <a class="dropdown-item" href="cadastro-estoque.html">Cadastrar</a>
-          <a class="dropdown-item" href="listar-estoque.html">Lista</a>
+          <a class="dropdown-item" href="/cadastraestoque">Cadastrar</a>
+          <a class="dropdown-item" href="/listaestoque">Lista</a>
         </div>
       </li>
       <li class="nav-item dropdown">
@@ -166,11 +139,7 @@
           <span>Finanças</span>
         </a>
         <div class="dropdown-menu" aria-labelledby="pagesDropdown">
-          <a class="dropdown-item" href="financas-pagamento.html">Pagamentos</a>
-          <a class="dropdown-item" href="financas-autorizar.html">Autorizar compra</a>
-          <a class="dropdown-item" href="financas-despesas.html">Despesas em geral</a>
-          <a class="dropdown-item" href="financas-receber.html">Contas a Receber</a>
-          <a class="dropdown-item" href="financas-contratacao.html">Contratação de seguros</a>
+          <a class="dropdown-item" href="/despesas">Despesas</a>
         </div>
       </li>
       <li class="nav-item dropdown">
@@ -206,108 +175,108 @@
           </div>
         </div>
 
-          <!-- Tabelas listagem -->
-          <div class="table-responsive">
-            <table class="table table-hover">
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>Categoria</th>
-                  <th>Valor Total</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr th:each="financa: ${financas}">
-                  <th scope="row">1</th>
-                  <td>Estoque</td>
-                  <td th:text="${'R$ '+financa.pecas}">15000</td>
-                </tr>
-                <tr>
-                  <th scope="row">2</th>
-                  <td>Funcionários</td>
-                  <td th:text="${'R$ '+financas.iterator().next().pgtoFuncionario}">20000</td>
-                </tr>
-                <tr>
-                  <th scope="row">3</th>
-                  <td>Seguro</td>
-                  <td th:text="${'R$ '+financas.iterator().next().seguros}">24000</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-
-          <!-- navegacao -->
-          <nav aria-label="Page navigation example">
-            <ul class="pagination">
-              <li class="page-item disabled"><a class="page-link" href="#">&lt; Anterior</a></li>
-              <li class="page-item active"><a class="page-link" href="#">1</a></li>
-              <li class="page-item"><a class="page-link" href="#">2</a></li>
-              <li class="page-item"><a class="page-link" href="#">3</a></li>
-              <li class="page-item"><a class="page-link" href="#">Próximo &gt;</a></li>
-            </ul>
-          </nav>
-
+        <!-- Tabelas listagem -->
+        <div class="table-responsive">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Categoria</th>
+                <th>Valor Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr th:each="financa: ${financas}">
+                <th scope="row">1</th>
+                <td>Estoque</td>
+                <td th:text="${'R$ '+financa.pecas}">15000</td>
+              </tr>
+              <tr>
+                <th scope="row">2</th>
+                <td>Funcionários</td>
+                <td th:text="${'R$ '+financas.iterator().next().pgtoFuncionario}">20000</td>
+              </tr>
+              <tr>
+                <th scope="row">3</th>
+                <td>Seguro</td>
+                <td th:text="${'R$ '+financas.iterator().next().seguros}">24000</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
-        <!-- /.container-fluid -->
 
-        <!-- Sticky Footer -->
-        <footer class="sticky-footer">
-          <div class="container my-auto">
-            <div class="copyright text-center my-auto">
-              <span>Copyright © GerenSys 2019</span>
-            </div>
-          </div>
-        </footer>
+        <!-- navegacao -->
+        <nav aria-label="Page navigation example">
+          <ul class="pagination">
+            <li class="page-item disabled"><a class="page-link" href="#">&lt; Anterior</a></li>
+            <li class="page-item active"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item"><a class="page-link" href="#">Próximo &gt;</a></li>
+          </ul>
+        </nav>
 
       </div>
-      <!-- /.content-wrapper -->
+      <!-- /.container-fluid -->
+
+      <!-- Sticky Footer -->
+      <footer class="sticky-footer">
+        <div class="container my-auto">
+          <div class="copyright text-center my-auto">
+            <span>Copyright © GerenSys 2019</span>
+          </div>
+        </div>
+      </footer>
 
     </div>
-    <!-- /#wrapper -->
+    <!-- /.content-wrapper -->
 
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-      <i class="fas fa-angle-up"></i>
-    </a>
+  </div>
+  <!-- /#wrapper -->
 
-    <!-- Logout Modal-->
-    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-      aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Deseja Sair?</h5>
-            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">×</span>
-            </button>
-          </div>
-          <div class="modal-body">Selecione "Sair" para encerrar sua sessão.</div>
-          <div class="modal-footer">
-            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-            <a class="btn btn-primary" href="login.html">Sair</a>
-          </div>
+  <!-- Scroll to Top Button-->
+  <a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+  </a>
+
+  <!-- Logout Modal-->
+  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Deseja Sair?</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">Selecione "Sair" para encerrar sua sessão.</div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+          <a class="btn btn-primary" href="login.html">Sair</a>
         </div>
       </div>
     </div>
+  </div>
 
-    <!-- Bootstrap core JavaScript-->
-    <script src="/vendor/jquery/jquery.min.js"></script>
-    <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <!-- Bootstrap core JavaScript-->
+  <script src="/vendor/jquery/jquery.min.js"></script>
+  <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-    <!-- Core plugin JavaScript-->
-    <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
+  <!-- Core plugin JavaScript-->
+  <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
 
-    <!-- Page level plugin JavaScript-->
-    <script src="/vendor/chart.js/Chart.min.js"></script>
-    <script src="/vendor/datatables/jquery.dataTables.js"></script>
-    <script src="/vendor/datatables/dataTables.bootstrap4.js"></script>
+  <!-- Page level plugin JavaScript-->
+  <script src="/vendor/chart.js/Chart.min.js"></script>
+  <script src="/vendor/datatables/jquery.dataTables.js"></script>
+  <script src="/vendor/datatables/dataTables.bootstrap4.js"></script>
 
-    <!-- Custom scripts for all pages-->
-    <script src="/js/sb-admin.min.js"></script>
+  <!-- Custom scripts for all pages-->
+  <script src="/js/sb-admin.min.js"></script>
 
-    <!-- Demo scripts for this page-->
-    <script src="/js/demo/datatables-demo.js"></script>
-    <script src="/js/demo/chart-area-demo.js"></script>
+  <!-- Demo scripts for this page-->
+  <script src="/js/demo/datatables-demo.js"></script>
+  <script src="/js/demo/chart-area-demo.js"></script>
 
 </body>
 
