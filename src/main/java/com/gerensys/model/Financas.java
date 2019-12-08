@@ -1,14 +1,11 @@
 package com.gerensys.model;
 
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 @Entity
@@ -21,21 +18,9 @@ public class Financas {
 	
 	private double pgtoFuncionario;
 	
-	private double despesasGerais;
-	
 	private double pecas;
-	
-	@OneToOne
-	@JoinColumn(name = "Estoque_codigoItem")
-	private Estoque estoque;
-	
-	@OneToMany(mappedBy = "financas")
-	private List<Seguro> seguros;
-	
-	
-	//Pq colocar Funcionario_matricula e veiculo_renavam?
-	
-	
+
+	private double seguros;
 
 	public Long getIdFinancas() {
 		return idFinancas;
@@ -53,14 +38,6 @@ public class Financas {
 		this.pgtoFuncionario = pgtoFuncionario;
 	}
 
-	public double getDespesasGerais() {
-		return despesasGerais;
-	}
-
-	public void setDespesasGerais(double despesasGerais) {
-		this.despesasGerais = despesasGerais;
-	}
-
 	public double getPecas() {
 		return pecas;
 	}
@@ -69,19 +46,11 @@ public class Financas {
 		this.pecas = pecas;
 	}
 
-	public Estoque getEstoque() {
-		return estoque;
-	}
-
-	public void setEstoque(Estoque estoque) {
-		this.estoque = estoque;
-	}
-
-	public List<Seguro> getSeguros() {
+	public double getSeguros() {
 		return seguros;
 	}
 
-	public void setSeguros(List<Seguro> seguros) {
+	public void setSeguros(double seguros) {
 		this.seguros = seguros;
 	}
 }

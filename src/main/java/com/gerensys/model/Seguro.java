@@ -16,14 +16,10 @@ public class Seguro {
 	
 	private String dataContratacao;
 	
-	private String valorSeguro;
+	private double valorSeguro;
 	
 	@OneToOne(mappedBy = "seguro", cascade = CascadeType.ALL, orphanRemoval = true)
 	private Veiculo veiculo;
-	
-	@ManyToOne
-	@JoinColumn(name = "FinancasIdFinancas")
-	private Financas financas;
 
 	public Long getNumeroApolice() {
 		return numeroApolice;
@@ -65,11 +61,11 @@ public class Seguro {
 		this.dataContratacao = dataContratacao;
 	}
 
-	public String getValorSeguro() {
+	public double getValorSeguro() {
 		return valorSeguro;
 	}
 
-	public void setValorSeguro(String valorSeguro) {
+	public void setValorSeguro(double valorSeguro) {
 		this.valorSeguro = valorSeguro;
 	}
 
@@ -79,13 +75,5 @@ public class Seguro {
 
 	public void setVeiculo(Veiculo veiculo) {
 		this.veiculo = veiculo;
-	}
-
-	public Financas getFinancas() {
-		return financas;
-	}
-
-	public void setFinancas(Financas financas) {
-		this.financas = financas;
 	}
 }

@@ -19,10 +19,7 @@ public class Estoque {
 	private String tipo;
 	
 	private double preco;
-	
-	@OneToOne(mappedBy = "estoque")
-	private Financas financas;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "id_manutencao")
 	private Manutencao manutencao; //Pq?? Se exluir manutencao irá excluir o estoque tbm
@@ -75,14 +72,6 @@ public class Estoque {
 
 	public void setPreco(double preco) {
 		this.preco = preco;
-	}
-
-	public Financas getFinancas() {
-		return financas;
-	}
-
-	public void setFinancas(Financas financas) {
-		this.financas = financas;
 	}
 
 	public Manutencao getManutencao() {

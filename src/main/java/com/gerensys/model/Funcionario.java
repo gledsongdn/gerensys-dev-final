@@ -1,13 +1,6 @@
 package com.gerensys.model;
 
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 
 @Entity
 public class Funcionario {
@@ -41,12 +34,6 @@ public class Funcionario {
 	private String validadeCnh;
 
 	private String categoriaCnh;
-
-	/*
-	 * @OneToOne
-	 * 
-	 * @JoinColumn(name = "cargo_idcargo") private Cargo cargo;
-	 */
 
 	@OneToOne
 	@JoinColumn(name = "pedido_idpedido")
@@ -186,5 +173,4 @@ public class Funcionario {
 	public void setNomeCargo(CargoEnum nomeCargo) {
 		this.nomeCargo = nomeCargo;
 	}
-
 }

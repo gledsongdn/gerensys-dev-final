@@ -16,4 +16,6 @@ public interface EstoqueRepository extends CrudRepository<Estoque, Long>{
 
     @Query("select e from Estoque e where e.nomeItem like %?1%")
     List<Estoque> findEstoqueByNameItem(String nomeItem);
+
+
 }
