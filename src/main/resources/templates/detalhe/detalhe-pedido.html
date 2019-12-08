@@ -10,7 +10,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>GerenSys - Manutenções</title>
+  <title>GerenSys - Funcionario</title>
 
   <!-- Custom fonts for this template-->
   <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -25,22 +25,21 @@
 
 <body id="page-top">
 
-  <!-- Modal -->
-  <div class="modal" tabindex="-1" role="dialog" id="delete-modal" aria-labelledby="modalLabel">
-    <div class="modal-dialog" role="document">
+  <!-- Modal Salvar -->
+  <div class="modal fade" id="modalsalvar" tabindex="-1" role="dialog" aria-labelledby="modalsalvar" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">Excluir Item</h5>
+          <h5 class="modal-title" id="exampleModalCenterTitle">Cadastrado</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
-          <p>Deseja realmente excluir este item?</p>
+          Cadastrado com sucesso.
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-primary">Sim</button>
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Não</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
         </div>
       </div>
     </div>
@@ -162,107 +161,85 @@
         <!-- Breadcrumbs-->
         <ol class="breadcrumb">
           <li class="breadcrumb-item">
-            <a href="#">Lista</a>
+            <a href="#">Acompanhamento</a>
           </li>
-          <li class="breadcrumb-item active">Manutenção</li>
+          <li class="breadcrumb-item active">Pedido</li>
         </ol>
 
-        <div id="top" class="row">
-          <div class="col-md-3">
-            <h3>Manutenções</h3>
-          </div>
-
-          <div class="col-md-6">
-            <form action="pesquisarmanutencao" method="post">
-              <div class="input-group">
-                <input name="nomepesquisa" class="form-control" id="search" type="text"
-                  placeholder="Pesquisa por placa">
-                <span class="input-group-btn">
-                  <button class="btn btn-primary" type="submit">
-                    <span class="fas fa-search"></span>
-                  </button>
-                </span>
+        <!-- DataTables Example -->
+        <h3>Página de acompanhamento</h3>
+        <h4>Sua viagem foi registrada com sucesso. Guarde sua senha para voltar à essa página caso precise.</h4>
+        <form action="salvaredit" method="POST" accept-charset="UTF-8" th:object="${objpedido}">
+          <input name="id" th:field="*{idpedido}" readonly type="hidden">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="form-label required" autofocus>Nome Completo</label>
+                <input class="form-control" required autofocus name="nome" type="text" th:field="*{cliente.nome}" readonly>
               </div>
-            </form>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="senha" class="form-label required">Endereço</label>
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                  </div>
+                  <input class="form-control" required type="text" name="endereco" th:field="*{cliente.endereco}" readonly>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="RG" class="form-label required">CPF</label>
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                  </div>
+                  <input class="form-control" required type="number" name="cpf" placeholder="Apenas números"
+                    th:field="*{cliente.cpf}" readonly>
+                </div>
+
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="email" class="form-label required">RG</label>
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                  </div>
+                  <input class="form-control" required type="number" name="rg" placeholder="Apenas números"
+                    th:field="*{cliente.rg}" readonly>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="telefone" class="form-label required">Telefone</label>
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                  </div>
+                  <input class="form-control" required type="number" placeholder="Apenas números" name="telefone"
+                    th:field="*{cliente.telefone}" readonly>
+                </div>
+              </div>
+            </div>
           </div>
 
-          <div class="col-md-3">
-            <a href="/listaveiculo" class="btn btn-primary pull-right h2">Cadastrar Manutenção</a>
+          <!-- salvar -->
+
+          <div class="row">
+            <div class="form-group" style="margin-top: 15px;">
+              <div class="col-md-12">
+                <!-- <input class="btn btn-success" type="submit" value="Salvar">
+                <button type="button" class="btn btn-primary">Voltar</button> -->
+                <a class="btn btn-primary" href="/">Voltar</a>
+              </div>
+            </div>
           </div>
-        </div> <!-- /#top -->
-
-        <!-- Tabelas listagem -->
-        <div class="table-responsive">
-          <table class="table table-hover">
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>Placa</th>
-                <th>Marca</th>
-                <th>Modelo</th>
-                <th>Ano</th>
-                <th>Renavam</th>
-                <th>Descrição</th>
-                <th>Ações</th>
-              </tr>
-            </thead>
-            <tbody th:remove="${#arrays.isEmpty(manutencoes)} ? all : 'all-but-first'">
-              <tr th:each="manutencao: ${manutencoes}">
-                <th scope="row" th:text="${manutencao.idManutencao}">1</th>
-                <td th:text="${manutencao.veiculo.placa}">ABC1234</td>
-                <td th:text="${manutencao.veiculo.marca}">Fiat</td>
-                <td th:text="${manutencao.veiculo.modelo}">Palio</td>
-                <td th:text="${manutencao.veiculo.ano}">2019</td>
-                <td th:text="${manutencao.veiculo.renavam}">55710425276</td>
-                <td th:text="${manutencao.descricaoProblema}">Revisão</td>
-                <td class="actions">
-                  <a class="btn btn-warning btn-sm" th:href="@{/editarmanutencao/{idmanutencao}(idmanutencao = ${manutencao.idManutencao})}">Editar</a>
-                  <a class="btn btn-success btn-sm" th:href="@{/removermanutencao/{idmanutencao}(idmanutencao = ${manutencao.idManutencao})}">Finalizar manutenção</a>
-                </td>
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>MYU9189</td>
-                <td>Renault</td>
-                <td>Duster</td>
-                <td>2018</td>
-                <td>42846328769</td>
-                <td>Troca de pneu</td>
-                <td>Aguardando autorização do financeiro pois não tinha peças</td>
-                <td class="actions">
-                  <a class="btn btn-warning btn-sm" href="cadastro-manutencao.html">Editar</a>
-                  <a class="btn btn-danger btn-sm" href="#" data-toggle="modal" data-target="#delete-modal">Excluir</a>
-                </td>
-              </tr>
-              <tr>
-                <th scope="row">3</th>
-                <td>HAW8613</td>
-                <td>Volkswagen</td>
-                <td>Jetta</td>
-                <td>2017</td>
-                <td>28534157181</td>
-                <td>Embreagem com defeito</td>
-                <td>Liberado de volta a frota</td>
-                <td class="actions">
-                  <a class="btn btn-warning btn-sm" href="cadastro-manutencao.html">Editar</a>
-                  <a class="btn btn-danger btn-sm" href="#" data-toggle="modal" data-target="#delete-modal">Excluir</a>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
-        <!-- navegacao -->
-        <nav aria-label="Page navigation example">
-          <ul class="pagination">
-            <li class="page-item disabled"><a class="page-link" href="#">&lt; Anterior</a></li>
-            <li class="page-item active"><a class="page-link" href="#">1</a></li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item"><a class="page-link" href="#">Próximo &gt;</a></li>
-          </ul>
-        </nav>
-
+        </form>
       </div>
       <!-- /.container-fluid -->
 
@@ -324,6 +301,99 @@
   <!-- Demo scripts for this page-->
   <script src="/js/demo/datatables-demo.js"></script>
   <script src="/js/demo/chart-area-demo.js"></script>
+  <script>
+    var select = document.querySelector('select');
+    var div = document.getElementById("divMotorista");
+
+    if (select.options[select.selectedIndex].value === 'NULL') {
+      div.innerHTML = `
+        <div class="row">
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="numeroCnh" class="form-label required">Número CNH</label>
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                  </div>
+                  <input class="form-control" required type="number" name="numeroCnh" th:field="*{objfuncionario.numeroCnh}" readonly>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="validadeCnh" class="form-label required">Validade CNH</label>
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                  </div>
+                  <input class="form-control" required type="date" name="validadeCnh" th:field="*{validadeCnh}" readonly>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="RG" class="form-label required">Categoria</label>
+                <div class="input-group mb-3">
+                  <select class="custom-select" readonly="readonly" tabindex="-1" aria-disabled="true" name="categoriaCnh" th:field="*{categoriaCnh}">
+                    <option value="A">A</option>
+                    <option value="B">B</option>
+                    <option value="C">C</option>
+                    <option value="D">D</option>
+                    <option value="E">E</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+        `
+    }
+    select.addEventListener('change', function () {
+      var selecionada = this.options[this.selectedIndex];
+      var div = document.getElementById("divMotorista");
+      var url = selecionada.getAttribute('data-url');
+
+      if (url) {
+        div.innerHTML = `
+        <div class="row">
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="numeroCnh" class="form-label required">Número CNH</label>
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                  </div>
+                  <input class="form-control" required type="number" name="numeroCnh" th:field="*{numeroCnh}">
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="validadeCnh" class="form-label required">Validade CNH</label>numeroCnh
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                  </div>
+                  <input class="form-control" required type="date" name="validadeCnh" th:field="*{validadeCnh}">
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="RG" class="form-label required">Categoria</label>
+                <div class="input-group mb-3">
+                  <select class="custom-select" name="categoriaCnh" th:field="*{categoriaCnh}">
+                    <option value="A">A</option>
+                    <option value="B">B</option>
+                    <option value="C">C</option>
+                    <option value="D">D</option>
+                    <option value="E">E</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+        `
+      } else if (!url) {
+        div.remove();
+      }
+    });
+  </script>
 
 </body>
 

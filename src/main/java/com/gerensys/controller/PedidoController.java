@@ -49,7 +49,16 @@ public class PedidoController {
         Long clienteid = pedido.getCliente().getId();
         funcionarioRepository.insertUsuarioAndRole(clienteid, (long) 5);
 
-        ModelAndView andView = new ModelAndView("cadastro/cadastro-pedido"); //cliente irá para pagina de acompanhamento
+        ModelAndView andView = new ModelAndView("detalhe/detalhe-pedido"); //cliente irá para página de acompanhamento
+        andView.addObject("objpedido", pedido);
+
+        return andView;
+    }
+
+    @GetMapping("/acompanhamento")
+    public ModelAndView acompanhamento() {
+        ModelAndView andView = new ModelAndView("detalhe/detalhe-pedido");
+        
 
         return andView;
     }

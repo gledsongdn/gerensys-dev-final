@@ -23,10 +23,13 @@ public class WebConfigSecurity extends WebSecurityConfigurerAdapter {
         http.csrf()
                 .disable()
                 .authorizeRequests()
-                .antMatchers(HttpMethod.GET, "/**").permitAll()
-                //.antMatchers(HttpMethod.GET, "/cadastrofuncionarios").hasAnyRole("ADMINISTRATIVO")
+                .antMatchers(HttpMethod.GET, "/").permitAll()
+                .antMatchers(HttpMethod.GET, "/pedido").permitAll()
+                .antMatchers(HttpMethod.POST, "/**salvarpedido").permitAll()
+                .antMatchers(HttpMethod.GET, "/acompanhamento").hasAnyRole("CLIENTE")
                 .anyRequest().authenticated()
                 .and().formLogin().permitAll()
+                .loginPage("/login")
                 .and().logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"));
     }
