@@ -1,10 +1,16 @@
 package com.gerensys.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import java.util.List;
 
 import javax.persistence.*;
 
 @Entity
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "idManutencao")
 public class Manutencao {
 
 	@Id
@@ -16,10 +22,12 @@ public class Manutencao {
 	private String descricaoProblema;
 	
 	@OneToMany(mappedBy = "manutencao", cascade = CascadeType.ALL, orphanRemoval = true)
+	@JsonManagedReference
 	private List<Estoque> estoques;
 	
 	@OneToOne
 	@JoinColumn(name = "veiculo_renavam")
+	@JsonBackReference
 	private Veiculo veiculo;
 
 	public Long getIdManutencao() {

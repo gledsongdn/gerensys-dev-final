@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="pt-br">
 
 <head>
 
@@ -9,36 +9,37 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>GerenSys - Cadastrar Pedido</title>
+  <title>GerenSys - Relatorios</title>
 
   <!-- Custom fonts for this template-->
-  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
 
   <!-- Page level plugin CSS-->
-  <link href="vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
+  <link href="/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
 
   <!-- Custom styles for this template-->
-  <link href="css/sb-admin.css" rel="stylesheet">
+  <link href="/css/sb-admin.css" rel="stylesheet">
 
 </head>
 
-<body id="page-top" onload="inserirData()">
+<body id="page-top">
 
-  <!-- Modal Salvar -->
-  <div class="modal fade" id="modalsalvar" tabindex="-1" role="dialog" aria-labelledby="modalsalvar" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
+  <!-- Modal -->
+  <div class="modal" tabindex="-1" role="dialog" id="delete-modal" aria-labelledby="modalLabel">
+    <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalCenterTitle">Cadastrado</h5>
+          <h5 class="modal-title">Excluir Item</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
-          Cadastrado com sucesso.
+          <p>Deseja realmente excluir este item?</p>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+          <button type="button" class="btn btn-primary">Sim</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Não</button>
         </div>
       </div>
     </div>
@@ -151,16 +152,6 @@
           <a class="dropdown-item" href="listar-relatorio.html">Listar</a>
         </div>
       </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown"
-          aria-haspopup="true" aria-expanded="false">
-          <i class="fa fa-user"></i>
-          <span>Cliente</span>
-        </a>
-        <div class="dropdown-menu" aria-labelledby="pagesDropdown">
-          <a class="dropdown-item" href="/pedido">Pedido</a>
-        </div>
-      </li>
     </ul>
 
     <div id="content-wrapper">
@@ -170,107 +161,96 @@
         <!-- Breadcrumbs-->
         <ol class="breadcrumb">
           <li class="breadcrumb-item">
-            <a href="#">Cadastro</a>
+            <a href="#">Lista</a>
           </li>
-          <li class="breadcrumb-item active">Pedido</li>
+          <li class="breadcrumb-item active">Relatório</li>
         </ol>
 
-        <!-- DataTables Example -->
-        <form action="salvarpedido" method="POST" accept-charset="UTF-8">
-          <input name="is_available" type="hidden" value="0">
-          <h1>Cliente</h1>
-          <div class="row">
-            <div class="col-md-6">
-              <div class="form-group">
-                <label class="form-label required" autofocus>Nome Completo</label>
-                <input class="form-control" required autofocus name="cliente.nome" type="text">
-              </div>
-            </div>
-            <div class="col-md-6">
-              <div class="form-group">
-                <label class="form-label required">Senha</label>
-                <input class="form-control" required name="cliente.senha" type="password">
-              </div>
-            </div>
-
-          </div>
-          <div class="row">
-            <div class="col-md-6">
-              <div class="form-group">
-                <label for="RG" class="form-label required">RG</label>
-                <div class="input-group mb-3">
-                  <div class="input-group-prepend">
-                  </div>
-                  <input class="form-control" required type="number" placeholder="Apenas números" name="cliente.rg">
-                </div>
-
-              </div>
-            </div>
-            <div class="col-md-6">
-              <div class="form-group">
-                <label for="email" class="form-label required">CPF</label>
-                <div class="input-group mb-3">
-                  <div class="input-group-prepend">
-                  </div>
-                  <input class="form-control" required type="number" placeholder="Apenas números" name="cliente.cpf">
-                </div>
-
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-6">
-              <div class="form-group">
-                <label class="form-label required">Endereço</label>
-                <input class="form-control" required name="cliente.endereco" type="text">
-              </div>
-            </div>
-            <div class="col-md-6">
-              <div class="form-group">
-                <label for="telefone" class="form-label required">Telefone</label>
-                <div class="input-group mb-3">
-                  <div class="input-group-prepend">
-                  </div>
-                  <input class="form-control" type="number" placeholder="Apenas números" name="cliente.telefone">
-                </div>
-              </div>
-            </div>
-          </div>
-          <h1>Pedido</h1>
-          <div class="row">
-            <div class="col-md-6">
-              <div class="form-group">
-                <label class="form-label required">Data</label>
-                <input class="form-control" required name="data" type="text" id="data" value="data aqui" readonly>
-              </div>
-            </div>
-            <div class="col-md-6">
-              <div class="form-group">
-                <label class="form-label required">Hora</label>
-                <input class="form-control" required name="hora" type="text" id="hora" value="horas aqui" readonly>
-              </div>
-            </div>
+        <div id="top" class="row">
+          <div class="col-md-3">
+            <h3>Estoque</h3>
           </div>
 
-          <div class="row">
-            <div class="col-md-8">
-              <div class="form-group">
-                <label class="form-label required">Endereço de destino</label>
-                <input class="form-control" required name="endereco" type="text">
+          <div class="col-md-6">
+            <form action="pesquisaritem" method="post">
+              <div class="input-group">
+                <input name="nomepesquisa" class="form-control" id="search" type="text"
+                  placeholder="Pesquisar item por nome">
+                <span class="input-group-btn">
+                  <button class="btn btn-primary" type="submit">
+                    <span class="fas fa-search"></span>
+                  </button>
+                </span>
               </div>
-            </div>
+            </form>
           </div>
 
-          <!-- salvar -->
-          <div class="row">
-            <div class="form-group" style="margin-top: 15px;">
-              <div class="col-md-12">
-                <input class="btn btn-success" type="submit" value="Salvar">
-                <button type="button" class="btn btn-outline-secondary" onClick="history.go(-1)">Cancelar</button>
-              </div>
-            </div>
+          <div class="col-md-3">
+            <a href="/cadastraestoque" class="btn btn-primary pull-right h2">Cadastrar Peças</a>
           </div>
-        </form>
+        </div> <!-- /#top -->
+
+        <!-- Tabelas listagem -->
+        <div class="table-responsive">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Nome</th>
+                <th>Tipo</th>
+                <th>Descrição</th>
+                <th>Quantidade</th>
+                <th>Preço</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+            <tbody th:remove="${#arrays.isEmpty(relatorios)} ? all : 'all-but-first'">
+              <tr th:each="relatorio ${relatorios}">
+                <th scope="row" th:text="${relatorio.numeroRelatorio}">1</th>
+                <td th:text="${relatorio.descricao}">1334</td>
+                <td class="actions">
+                  <a class="btn btn-danger btn-sm" th:href="@{/removeritem/{iditem}(iditem = ${item.id})}">Excluir</a>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">2</th>
+                <td>1335</td>
+                <td>Embreagem</td>
+                <td>Embreagem Luk</td>
+                <td>Kit de Embreagem Luk</td>
+                <td>50</td>
+                <td class="actions">
+                  <a class="btn btn-warning btn-sm" href="cadastro-estoque.html">Editar</a>
+                  <a class="btn btn-danger btn-sm" href="#" data-toggle="modal" data-target="#delete-modal">Excluir</a>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">3</th>
+                <td>1336</td>
+                <td>Pastilha de freio</td>
+                <td>Fiat</td>
+                <td>Kit Pastilha de freio Fita</td>
+                <td>30</td>
+                <td class="actions">
+                  <a class="btn btn-warning btn-sm" href="cadastro-estoque.html">Editar</a>
+                  <a class="btn btn-danger btn-sm" href="#" data-toggle="modal" data-target="#delete-modal">Excluir</a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- navegacao -->
+        <nav aria-label="Page navigation example">
+          <ul class="pagination">
+            <li class="page-item disabled"><a class="page-link" href="#">&lt; Anterior</a></li>
+            <li class="page-item active"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item"><a class="page-link" href="#">Próximo &gt;</a></li>
+          </ul>
+        </nav>
+
       </div>
       <!-- /.container-fluid -->
 
@@ -315,34 +295,23 @@
   </div>
 
   <!-- Bootstrap core JavaScript-->
-  <script src="vendor/jquery/jquery.min.js"></script>
-  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="/vendor/jquery/jquery.min.js"></script>
+  <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
   <!-- Core plugin JavaScript-->
-  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+  <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
 
   <!-- Page level plugin JavaScript-->
-  <script src="vendor/datatables/jquery.dataTables.js"></script>
-  <script src="vendor/datatables/dataTables.bootstrap4.js"></script>
+  <script src="/vendor/chart.js/Chart.min.js"></script>
+  <script src="/vendor/datatables/jquery.dataTables.js"></script>
+  <script src="/vendor/datatables/dataTables.bootstrap4.js"></script>
 
   <!-- Custom scripts for all pages-->
-  <script src="js/sb-admin.min.js"></script>
+  <script src="/js/sb-admin.min.js"></script>
 
   <!-- Demo scripts for this page-->
-  <script src="js/demo/datatables-demo.js"></script>
-
-  <script>
-    function inserirData() {
-      var d = new Date();
-      var monthname = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"];
-      var dataAtual = `${d.getDate()}/${monthname[d.getMonth()]}/${d.getFullYear()}`;
-      var horaAtual = `${d.getHours()}:${d.getMinutes()}`;
-
-      document.getElementById('hora').value = horaAtual;
-      document.getElementById('data').value = dataAtual;
-    }
-
-  </script>
+  <script src="/js/demo/datatables-demo.js"></script>
+  <script src="/js/demo/chart-area-demo.js"></script>
 
 </body>
 

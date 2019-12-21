@@ -1,8 +1,12 @@
 package com.gerensys.model;
 
+import com.fasterxml.jackson.annotation.*;
+
 import javax.persistence.*;
 
 @Entity
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "idpedido")
+@JsonIgnoreProperties({"funcionario", "viagem"})
 public class Pedido {
 
 	@Id
@@ -23,37 +27,16 @@ public class Pedido {
 	
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "id_cliente")
+	@JsonBackReference(value = "cliente")
 	private Cliente cliente;
 	
 	@OneToOne
+	@JsonManagedReference(value = "pedido")
 	private Funcionario funcionario;
 
 	@OneToOne(mappedBy = "pedido")
+	@JsonManagedReference(value = "viagem")
 	private Viagem viagem;
-
-	public boolean validar() {
-		if (horaDevolucao.isEmpty()) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-
-	public Viagem getViagem() {
-		return viagem;
-	}
-
-	public void setViagem(Viagem viagem) {
-		this.viagem = viagem;
-	}
-
-	public Funcionario getFuncionario() {
-		return funcionario;
-	}
-
-	public void setFuncionario(Funcionario funcionario) {
-		this.funcionario = funcionario;
-	}
 
 	public Long getIdpedido() {
 		return idpedido;
@@ -101,5 +84,21 @@ public class Pedido {
 
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
+	}
+
+	public Funcionario getFuncionario() {
+		return funcionario;
+	}
+
+	public void setFuncionario(Funcionario funcionario) {
+		this.funcionario = funcionario;
+	}
+
+	public Viagem getViagem() {
+		return viagem;
+	}
+
+	public void setViagem(Viagem viagem) {
+		this.viagem = viagem;
 	}
 }

@@ -1,8 +1,14 @@
 package com.gerensys.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import javax.persistence.*;
 
 @Entity
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "renavam")
 public class Veiculo {
 
     @Id
@@ -21,16 +27,20 @@ public class Veiculo {
     private int quilometragem;
 
     @OneToOne(mappedBy = "veiculo", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    @JsonManagedReference
     private Manutencao manutencao;
 
     @OneToOne
     @JoinColumn(name = "Seguro_numApolice")
+    @JsonBackReference
     private Seguro seguro;
 
     @OneToOne(mappedBy = "veiculo")
+    @JsonManagedReference
     private Viagem viagem;
 
     @OneToOne(mappedBy = "veiculo", cascade = CascadeType.ALL)
+    @JsonManagedReference(value = "veiculo")
     private Funcionario funcionario;
 
     public Viagem getViagem() {

@@ -58,7 +58,7 @@ public class PedidoController {
     @GetMapping("/acompanhamento")
     public ModelAndView acompanhamento() {
         ModelAndView andView = new ModelAndView("detalhe/detalhe-pedido");
-        
+
 
         return andView;
     }

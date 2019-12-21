@@ -1,5 +1,10 @@
 package com.gerensys.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -8,6 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
 @Entity
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "idViagem")
 public class Viagem {
 
     @Id
@@ -16,17 +22,21 @@ public class Viagem {
 
     @OneToOne
     @JoinColumn(name = "idFuncionario")
+    @JsonBackReference(value = "funcionario")
     private Funcionario funcionario;
 
     @OneToOne
     @JoinColumn(name = "idVeiculo")
+    @JsonBackReference
     private Veiculo veiculo;
 
     @OneToOne
     @JoinColumn(name = "idPedido")
+    @JsonBackReference(value = "viagem")
     private Pedido pedido;
 
     @OneToOne(mappedBy = "viagem")
+    @JsonManagedReference
     private Relatorio relatorio;
 
     public Long getIdViagem() {

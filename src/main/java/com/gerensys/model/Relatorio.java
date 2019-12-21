@@ -1,5 +1,9 @@
 package com.gerensys.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,6 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
 @Entity
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "numeroRelatorio")
 public class Relatorio {
 
 	@Id
@@ -23,6 +28,7 @@ public class Relatorio {
 	
 	@OneToOne
 	@JoinColumn(name = "idViagem")
+	@JsonBackReference
 	private Viagem viagem;
 
 	public Long getNumeroRelatorio() {

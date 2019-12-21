@@ -1,8 +1,13 @@
 package com.gerensys.model;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import javax.persistence.*;
 
 @Entity
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "numeroApolice")
 public class Seguro {
 
 	@Id
@@ -19,6 +24,7 @@ public class Seguro {
 	private double valorSeguro;
 	
 	@OneToOne(mappedBy = "seguro", cascade = CascadeType.ALL, orphanRemoval = true)
+	@JsonManagedReference
 	private Veiculo veiculo;
 
 	public Long getNumeroApolice() {

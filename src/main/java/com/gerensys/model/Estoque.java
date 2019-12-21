@@ -2,6 +2,8 @@ package com.gerensys.model;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 public class Estoque {
 
@@ -22,6 +24,7 @@ public class Estoque {
 
 	@ManyToOne
 	@JoinColumn(name = "id_manutencao")
+	@JsonBackReference
 	private Manutencao manutencao; //Pq?? Se exluir manutencao irá excluir o estoque tbm
 
 
