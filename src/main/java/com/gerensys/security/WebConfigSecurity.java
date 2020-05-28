@@ -42,7 +42,7 @@ public class WebConfigSecurity extends WebSecurityConfigurerAdapter {
                 .passwordEncoder(new BCryptPasswordEncoder());
 
         /*auth.inMemoryAuthentication().passwordEncoder(new BCryptPasswordEncoder())
-                .withUser("gledson")
+                .withUser("user")
                 .password("$2a$10$R53iHqdNGnKk.2ajlz2HSePmk4DUUI.an0vig4JD55EyBe3spDr46")
                 .roles("ADMIN");*/
     }
