@@ -13,7 +13,9 @@ Sistema construído com Framework Spring e Thymeleaf com recursos de HTML e CSS 
 O armazenamento dos dados é feito pelo SGBD MySQL.
 
 #### Sistema Mobile
-Desenvolvido com React Native, consumindo api densenvolvida com Spring. link para github
+Desenvolvido com React Native, consumindo api densenvolvida com Spring. 
+
+Projeto: [gerensys-react-native](https://github.com/gledsongdn/gerensys-react-native)
 
 ## REST API
    Api do projeto foi feita em Java utilizando o Framework Spring.
