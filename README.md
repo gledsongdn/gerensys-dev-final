@@ -19,7 +19,7 @@ Projeto: [gerensys-react-native](https://github.com/gledsongdn/gerensys-react-na
 
 ## REST API
    Api do projeto foi feita em Java utilizando o Framework Spring.
-   Para acessar a api é necessario esse link http://localhost:8080/api/
+   Para acessar a api é necessário esse link http://localhost:8080/api/
 
 ### Rode esse projeto em sua IDE
 
